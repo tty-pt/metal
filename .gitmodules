@@ -4,3 +4,6 @@
 [submodule "wabt"]
 	path = wabt
 	url = https://github.com/WebAssembly/wabt
+[submodule "metal-linux"]
+	path = metal-linux
+	url = git@github.com:quirinpa/metal-linux.git
