@@ -1,0 +1,4 @@
+/bin/metal.wasm
+/tmp/*
+!/tmp/Makefile
+!/tmp/patches

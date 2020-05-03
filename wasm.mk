@@ -1,11 +1,11 @@
 ARCH=wasm32
 TARGET=${ARCH}-unknown-unknown
 srcdir?=.
-sysroot:=${srcdir}/../..
+sysroot:=${srcdir}/..
 
 LLVM_ROOT:=/usr/local
 CC:=${LLVM_ROOT}/bin/clang
-CFLAGS += --sysroot ${sysroot} --target=${TARGET} --emit-llvm
+CFLAGS += --sysroot ${sysroot} --target=${TARGET}
 LDFLAGS += --allow-undefined-file=${sysroot}/lib/wasm.syms --export-dynamic
 LD_CFLAGS += -fuse-ld=${LD} ${LDFLAGS:%=--Wl,%}
 

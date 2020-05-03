@@ -23,12 +23,12 @@ wat2js-flags-y := -O3 ${metal-flags-y} --enable-mutable-globals
 .wat.js:
 	${be}/wasm2js ${wasm2js-flags-y} $< > $@
 
-.wasm.js:
-	${be}/wasm2js ${wasm2js-flags-y} $< > $@
+# .wasm.js:
+# 	${be}/wasm2js ${wasm2js-flags-y} $< > $@
 
 .wasm.wat:
 	${wasm2wat} ${metal-flags-y} --fold-expr $< > $@
 
-.wat.wasm:
-	${wat2wasm} ${metal-flags-y} $< > $@
+# .wat.wasm:
+# 	${wat2wasm} ${metal-flags-y} $< > $@
 
