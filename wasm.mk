@@ -24,3 +24,8 @@ SHARED_LIBS=
 prefix != cd ${sysroot} ; pwd
 exec_prefix=${prefix}
 CROSS-COMPILE=llvm-
+
+.SUFFIXES: .wasm .js
+be := ${sysroot}/binaryen/bin
+.wasm.js:
+	${be}/wasm2js ${wasm2js-flags-y} $< > $@

@@ -1,4 +1,5 @@
 /bin/metal.wasm
+/metal.js
 /tmp/*
 !/tmp/Makefile
 !/tmp/patches

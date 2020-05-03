@@ -3,25 +3,36 @@
 include metal.mk
 
 RTLIB=lclang_rt.builtins-wasm32
+subdirs-y := tmp/ musl/ metal-linux/
 
 all: lib/${RTLIB}.a lib/libc.a metal.js
 
+version != git rev-parse HEAD
+pkg-name := metal-${version}
+
+metal-build := lib/* bin/* metal.js metal.mk
+
 metal.js: bin/metal.wasm
 
-lib/$(RTLIB).a:
-	${MAKE} -C tmp install
+lib/$(RTLIB).a: tmp/
+lib/libc.a: musl/
+bin/metal.wasm: metal-linux/
 
-lib/libc.a:
-	gmake -C musl install
+musl/:
+	gmake -C $@ install
+${subdirs-y}:
+	${MAKE} -C $@ install
 
-bin/metal.wasm:
-	${MAKE} -C metal-linux
+musl/-clean:
+	gmake -C musl/ clean
+subdirs-clean-y := ${subdirs-y:%=%-clean}
+$(subdirs-clean-y):
+	${MAKE} -C ${@:%-clean=%} clean
 
 clean:
-	${MAKE} -C tmp clean
-	gmake -C musl clean
-	${MAKE} -C metal-linux clean
 	rm -rf bin/* lib/*.a lib/*.o lib/*.specs include *.tar.gz
 
-dist: all
-	tar zcf metal-toolchain-0-0-0.tar.gz bin/* lib/* include/* Makefile
+tar: all
+	tar zcf ${pkg-name}.tar.gz ${metal-build}
+
+.PHONY: ${subdirs-y} ${subdirs-clean-y}
