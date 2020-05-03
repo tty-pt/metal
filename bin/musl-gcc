@@ -1,0 +1,2 @@
+#!/bin/sh
+exec "${REALGCC:-gcc}" "$@" -specs "/home/quirinpa/wasm/lib/musl-gcc.specs"
