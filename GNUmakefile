@@ -1,38 +1,40 @@
 .PHONY: all run clean init dist
 
+wasm2js-env := .\\/metal-env.js
 include metal.mk
 
 RTLIB=lclang_rt.builtins-wasm32
-subdirs-y := tmp/ musl/ metal-linux/
+subdirs := tmp/ musl/ metal-linux/
+build-dirs-y := bin/ include/
+GMAKE ?= gmake
 
-all: lib/${RTLIB}.a lib/libc.a metal.js
+all: tmp/ lib/${RTLIB}.a lib/libc.a metal.js
 
-version != git rev-parse HEAD
-pkg-name := metal-${version}
-
-metal-build := lib/* bin/* metal.js metal.mk
+metal-build := ${build-dirs-y} \
+	metal.js metal-env.js metal.mk
 
 metal.js: bin/metal.wasm
-
-lib/$(RTLIB).a: tmp/
-lib/libc.a: musl/
 bin/metal.wasm: metal-linux/
+lib/$(RTLIB).a: tmp/
+lib/libc.a: musl/ include/
+$(build-dirs-y):
+	mkdir -p ${build-dirs-y}
 
 musl/:
-	gmake -C $@ install
-${subdirs-y}:
+	${GMAKE} -C $@ install
+$(subdirs):
 	${MAKE} -C $@ install
 
 musl/-clean:
-	gmake -C musl/ clean
-subdirs-clean-y := ${subdirs-y:%=%-clean}
-$(subdirs-clean-y):
+	${GMAKE} -C musl/ clean
+subdirs-clean := ${subdirs:%=%-clean}
+$(subdirs-clean):
 	${MAKE} -C ${@:%-clean=%} clean
 
-clean:
-	rm -rf bin/* lib/*.a lib/*.o lib/*.specs include *.tar.gz
+clean: ${subdirs-clean}
+	rm -rf ${build-dirs-y} lib/*.a lib/*.o lib/*.specs *.tar.gz
 
 tar: all
-	tar zcf ${pkg-name}.tar.gz ${metal-build}
+	tar zcf metal.tar.gz ${metal-build}
 
-.PHONY: ${subdirs-y} ${subdirs-clean-y}
+.PHONY: ${subdirs} ${subdirs-clean}
