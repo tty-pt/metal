@@ -1,5 +1,9 @@
 # Description
-Compile C into asm.js. No one can destroy the Metal. I saw the talk.
+This is Linux (or part of it) compiled to JS.
+The standard libraries and everything needed to start compiling C to JS.
+
+
+No one can destroy the Metal. I saw the talk.
 
 # Motivation
 A C WebAssembly kernel seemed interesting and I couldn't get Emscripten to work on OpenBSD.
