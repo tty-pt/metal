@@ -1,11 +1,21 @@
 # Description
-This is Linux (or part of it) compiled to JS, it is also a toolchain you can use to compile your own C code to Javascript, using mostly POSIX tools, LLVM+clang and binaryen.
+This is, in essence, Linux (or part of it) compiled to JS, it is also a toolchain you can use to compile your own C code to Javascript, using mostly POSIX tools, LLVM+clang and binaryen.
 
 
 Other things used to build metal.tar.gz are Linux, compilerrt and musl.
 
 
 No one can destroy the Metal. I saw the talk.
+
+
+I am very noob in many ways, and I have much to learn. Although, I am a subscriber of Linus Torvalds' philosophy, for I believe he knows his shit:
+
+
+Actions speak louder than words.
+
+
+I've come to a point in my life where I don't feel like putting up with the bullshit anymore.
+I want to do something with my life, as a gift to someone I love.
 
 # Motivation
 A C WebAssembly kernel seemed interesting and I couldn't get Emscripten to work on OpenBSD.
