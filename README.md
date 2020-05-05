@@ -15,7 +15,7 @@ Actions speak louder than words.
 
 
 I've come to a point in my life where I don't feel like putting up with the bullshit anymore.
-I want to do something with my life, as a gift to someone I love, and there isn't a horrible creature I wouldn't slice to gain xp.
+I want to do something with my life, as a gift to someone I love, and there isn't an npc I  wouldn't crash to gain xp.
 I will exorcise demons! And expose shadows with my Kamehameha!
 
 # Start working
@@ -102,7 +102,6 @@ I will keep using this though, because I find it useful.
 
 
 The rest is in the hands of fate.
-And METAL FATE ROCKS.
 
 # Plans
 Compile time option to choose between WebAssembly and asm.js.
