@@ -105,4 +105,4 @@ The rest is in the hands of fate.
 And METAL FATE ROCKS.
 
 # Plans
-Support both WebAssembly and asm.js.
+Compile time option to choose between WebAssembly and asm.js.
