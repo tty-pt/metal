@@ -18,6 +18,9 @@ I've come to a point in my life where I don't feel like putting up with the bull
 I want to do something with my life, as a gift to someone I love, and there isn't an npc I  wouldn't crash to gain xp.
 I will exorcise demons! And expose shadows with my Kamehameha!
 
+
+I hope that someone else finds this interesting and helps me out here.
+
 # Start working
 This example assumes your build of LLVM+clang has WebAssembly support and that it and binaryen are installed and accessible through the PATH environment variable.
 
