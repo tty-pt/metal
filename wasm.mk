@@ -18,7 +18,7 @@ PROG_LDLIBS+=-lc
 
 AR=llvm-ar
 RANLIB=llvm-ranlib
-# prefix != cd ${DESTDIR} ; pwd
+prefix=
 exec_prefix=${prefix}
 CROSS-COMPILE=llvm-
 

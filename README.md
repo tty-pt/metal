@@ -50,12 +50,14 @@ clean:
 !
 cat > example.c <<!
 #include <stdio.h>
+#include <metal.h>
 
-MEXPORT
+export
 unsigned max_len = 64;
 
 char buf[max_len];
 
+export
 void hello() {
 	snprintf(buf, "hello %s\n", buf);
 }

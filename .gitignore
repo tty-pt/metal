@@ -1,6 +1,11 @@
-/bin/metal.wasm
-/metal.js
+/bin/*
+/include/*
+!/include/metal.h
+!/include/features.h
+/lib/*
+!/lib/wasm/syms
 /tmp/*
-/lib/*.a
 !/tmp/Makefile
 !/tmp/patches
+
+/metal.js
