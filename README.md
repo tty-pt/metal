@@ -18,9 +18,6 @@ I've come to a point in my life where I don't feel like putting up with the bull
 I want to do something with my life, as a gift to someone I love, and there isn't a horrible creature I wouldn't slice to gain xp.
 I will exorcise demons! And expose shadows with my Kamehameha!
 
-# Motivation
-Well I just mentioned the most important one but from a technical standpoint a C WebAssembly kernel seemed interesting and I couldn't get Emscripten to work on OpenBSD.
-
 # Start working
 This example assumes your build of LLVM+clang has WebAssembly support and that it and binaryen are installed and accessible through the PATH environment variable.
 
