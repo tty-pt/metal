@@ -15,7 +15,7 @@ Actions speak louder than words.
 
 
 I've come to a point in my life where I don't feel like putting up with the bullshit anymore.
-I want to do something with my life, as a gift to someone I love.
+I want to do something with my life, as a gift to someone I love, and there isn't a horrible creature I wouldn't slice to gain xp.
 
 # Motivation
 Well I just mentioned the most important one but from a technical standpoint a C WebAssembly kernel seemed interesting and I couldn't get Emscripten to work on OpenBSD.
