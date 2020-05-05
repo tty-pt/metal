@@ -87,6 +87,7 @@ import { hello, buf_get, max_len, memory } from './metal/example/example.js';
 memory_resolve(memory);
 const name = prompt("Please enter your name", "Judas");
 instr(memory, buf_get(), name, max_len);
+hello();
 !
 ```
 
