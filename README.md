@@ -5,7 +5,7 @@ This is, in essence, Linux (or part of it) compiled to JS, it is also a toolchai
 Other things used to build metal.tar.gz are Linux, compilerrt and musl.
 
 
-No one can destroy the Metal. I saw the talk.
+No one can destroy the Metal. I saw the talk, and I heard the band.
 
 
 I am very noob in many ways, and I have much to learn. Although, I am a subscriber of Linus Torvalds' philosophy, for I believe he knows his shit:
