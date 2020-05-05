@@ -87,9 +87,10 @@ instr(memory, buf_get(), name, max_len);
 !
 ```
 
-Again, this _should_ get you to the point you have a working example.
+This _should_ get you to the point you have a working example.
 
-I really need help testing this out on Linux.
+
+I really need help testing it on Linux.
 
 # Building / developing the Metal
 Currently I have no access to the modified LLVM source code.
@@ -101,3 +102,6 @@ I will keep using this though, because I find it useful.
 
 The rest is in the hands of fate.
 And METAL FATE ROCKS.
+
+# Plans
+Support both WebAssembly and asm.js.
