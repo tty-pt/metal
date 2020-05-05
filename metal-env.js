@@ -1,4 +1,10 @@
-function _jsnstr(buf, l) {
+// export let memory_resolve;
+// let memory_p = new Promise(function (resolve) {
+//         memory_resolve = resolve
+// });
+
+export function strout(memory, p, l) {
+        let buf = new Uint8Array(memory.buffer, p, l);
         let s = "";
         let i;
 
@@ -8,10 +14,6 @@ function _jsnstr(buf, l) {
         return s;
 }
 
-export function jsnstr(mem, p, l) {
-        return _jsnstr(new Uint8Array(mem, p, l), l);
-}
-
 export let memory_resolve;
 let memory_p = new Promise(function (resolve) {
         memory_resolve = resolve
@@ -19,7 +21,7 @@ let memory_p = new Promise(function (resolve) {
 
 export function console_log(p, l) {
         memory_p.then(memory => {
-                console.log(jsnstr(memory.buffer, p, l));
+                console.log(strout(memory, p, l));
         });
 }
 
