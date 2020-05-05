@@ -1,6 +1,8 @@
 # Description
-This is Linux (or part of it) compiled to JS.
-The standard libraries and everything needed to start compiling C to JS.
+This is Linux (or part of it) compiled to JS, it is also a toolchain you can use to compile your own C code to Javascript, using mostly POSIX tools, LLVM+clang and binaryen.
+
+
+Other things used to build metal.tar.gz are Linux, compilerrt and musl.
 
 
 No one can destroy the Metal. I saw the talk.
@@ -9,8 +11,7 @@ No one can destroy the Metal. I saw the talk.
 A C WebAssembly kernel seemed interesting and I couldn't get Emscripten to work on OpenBSD.
 
 # Start working
-You will need at binaryen, and a build of llvm+clang with WebAssembly support.
-You can configure these, but the example assumes you have both installed.
+This example assumes your build of LLVM+clang has WebAssembly support and that it and binaryen are installed and accessible through the PATH environment variable.
 
 ```sh
 # change the following to the root of your web project.
