@@ -1,10 +1,12 @@
 # Description
-Compile C into asm.js. No one can destroy the Metal.
+Compile C into asm.js. No one can destroy the Metal. I saw the talk.
+
+# Motivation
+A C WebAssembly kernel seemed interesting and I couldn't get Emscripten to work on OpenBSD.
 
 # Start working
-You will need at binaryen, and a build of llvm+clang with WebAssembly support. Installed.
-
-Using the following instructions:
+You will need at binaryen, and a build of llvm+clang with WebAssembly support.
+You can configure these, but the example assumes you have both installed.
 
 ```sh
 # change the following to the root of your web project.
@@ -33,19 +35,54 @@ clean:
 cat > example.c <<!
 #include <stdio.h>
 
-char *ptr;
+MEXPORT
+unsigned max_len = 64;
+
+char buf[max_len];
 
 void hello() {
-	snprintf(ptr, "hello world\n");
+	snprintf(buf, "hello %s\n", buf);
 }
 
-char *ptr_get() {
-	return ptr;
+char *buf_get() {
+	return buf;
 }
 !
 make
 ```
 
-_Should_ generate example.js which you can load using script tags with the type attribute set to "module".
+I don't suppose you should copy and paste this part.
+```sh
+cd ../..
+cat > index.html <<!
+<!DOCTYPE html>
+<html>
+	<head>
+		<script type="module" src="index.js"></script>
+	</head>
+</html>
+!
+cat > index.js <<!
+import { strin, memory_resolve } from './metal/metal-env.js';
+import { hello, buf_get, max_len, memory } from './metal/example/example.js';
 
-A full example will follow shortly.
+memory_resolve(memory);
+const name = prompt("Please enter your name", "Judas");
+instr(memory, buf_get(), name, max_len);
+!
+```
+
+Again, this _should_ get you to the point you have a working example.
+
+I really need help testing this out on Linux.
+
+# Building / developing the Metal
+Currently I have no access to the modified LLVM source code.
+I'm not sure I will have access to the disk in the future for deeply personal reasons.
+Neither am I willing to insist about it. I'll do it from scratch if have to.
+I think meanwhile they have dropped ELF support among other things.
+I will keep using this though, because I find it useful.
+
+
+The rest is in the hands of fate.
+And METAL FATE ROCKS.
