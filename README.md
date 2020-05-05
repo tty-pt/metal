@@ -51,7 +51,7 @@ char *buf_get() {
 make
 ```
 
-I don't suppose you should copy and paste this part.
+I don't suppose you should copy and paste this part exactly. Beware.
 ```sh
 cd ../..
 cat > index.html <<!
