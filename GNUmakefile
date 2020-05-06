@@ -5,7 +5,7 @@ include metal.mk
 
 RTLIB=lclang_rt.builtins-wasm32
 subdirs := tmp/ musl/ metal-linux/
-build-dirs-y := bin/ include/
+build-dirs-y := bin/ include/ lib/
 GMAKE ?= gmake
 
 all: tmp/ lib/${RTLIB}.a lib/libc.a metal.js
