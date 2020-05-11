@@ -4,3 +4,6 @@
 [submodule "musl"]
 	path = musl
 	url = git@github.com:quirinpa/musl.git
+[submodule "binaryen"]
+	path = binaryen
+	url = https://github.com/WebAssembly/binaryen

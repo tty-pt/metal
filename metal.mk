@@ -12,10 +12,8 @@ LD := ${LLVM_ROOT}/bin/wasm-ld
 LINK.c := ${LD} ${LDFLAGS}
 metal-flags-y := --enable-reference-types
 wasm2js-flags-y := -O3 ${metal-flags-y} --enable-mutable-globals
-wat2js-flags-y := -O3 ${metal-flags-y} --enable-mutable-globals
-wasm2js-filter ?= cat
-wasm2js-env ?= ..\\/metal.js
+# wat2js-flags-y := -O3 ${metal-flags-y} --enable-mutable-globals
 
 .SUFFIXES: .wasm .js
 .wasm.js:
-	${BINARYEN_PATH}wasm2js ${wasm2js-flags-y} $< | sed "s/^import { \([^ ]*\) } from 'env';$$/import { \1 } from '${wasm2js-env}';/" | ${wasm2js-filter} > $@
+	${BINARYEN_PATH}wasm2js ${wasm2js-flags-y} $< > $@

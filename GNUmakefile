@@ -3,8 +3,10 @@
 wasm2js-env := .\\/metal-env.js
 include metal.mk
 
-RTLIB=lclang_rt.builtins-wasm32
-subdirs := tmp/ musl/ metal-linux/
+RTLIB=libclang_rt.builtins-wasm32
+llvm-config != which llvm-config && echo "y"
+subdirs-$(llvm-config) := tmp/
+subdirs := ${subdirs-y} musl/ metal-linux/
 build-dirs-y := bin/ include/ lib/
 GMAKE ?= gmake
 
@@ -13,9 +15,12 @@ all: tmp/ lib/${RTLIB}.a lib/libc.a metal.js
 metal-build := ${build-dirs-y} \
 	metal.js metal-env.js metal.mk
 
+rtlib-$(llvm-config) := tmp/
+
 metal.js: bin/metal.wasm
 bin/metal.wasm: metal-linux/
-lib/$(RTLIB).a: tmp/
+lib/$(RTLIB).a: ${rtlib-y}
+	[[ -f $@ ]] || tar xzf metal.tar.gz $@
 lib/libc.a: musl/ include/
 $(build-dirs-y):
 	mkdir -p ${build-dirs-y}
