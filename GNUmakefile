@@ -10,17 +10,19 @@ subdirs := ${subdirs-y} musl/ metal-linux/
 build-dirs-y := bin/ include/ lib/
 GMAKE ?= gmake
 
-all: tmp/ lib/${RTLIB}.a lib/libc.a metal.js
+include hjs.mk
+
+all: tmp/ lib/${RTLIB}.a lib/libc.a full-metal.js
 
 metal-build := ${build-dirs-y} \
-	metal.js metal-env.js metal.mk
+	full-metal.js hjs.mk metal.mk
 
 rtlib-$(llvm-config) := tmp/
-
+full-metal.js: metal-env.js metal.js
 metal.js: bin/metal.wasm
 bin/metal.wasm: metal-linux/
 lib/$(RTLIB).a: ${rtlib-y}
-	[[ -f $@ ]] || tar xzf metal.tar.gz $@
+	tar xzf metal.tar.gz $@
 lib/libc.a: musl/ include/
 $(build-dirs-y):
 	mkdir -p ${build-dirs-y}
@@ -37,7 +39,7 @@ $(subdirs-clean):
 	${MAKE} -C ${@:%-clean=%} clean
 
 clean: ${subdirs-clean}
-	rm -rf ${build-dirs-y} lib/*.a lib/*.o lib/*.specs *.tar.gz
+	rm -rf full-metal.js ${build-dirs-y} lib/*.a lib/*.o lib/*.specs *.tar.gz
 
 tar: all
 	tar zcf metal.tar.gz ${metal-build}
