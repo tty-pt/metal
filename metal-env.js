@@ -61,8 +61,7 @@ window.env.tty_read = function tty_read() {};
 
 window.env.strin = function strin(mem, ptr, str, maxlen) {
         var wm = new Uint8Array(mem.buffer);
-        var
-	enc = new TextEncoder();
+        var enc = new TextEncoder();
         var bbuf = enc.encode(str);
         var i;
         // var buf = new Uint8Array(mem.buffer, ptr, maxlen);

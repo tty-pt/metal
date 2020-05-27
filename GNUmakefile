@@ -6,7 +6,7 @@ include metal.mk
 RTLIB=libclang_rt.builtins-wasm32
 llvm-config != which llvm-config && echo "y"
 subdirs-$(llvm-config) := tmp/
-subdirs := ${subdirs-y} musl/ metal-linux/
+subdirs-y += musl/ metal-linux/
 build-dirs-y := bin/ include/ lib/
 GMAKE ?= gmake
 
@@ -29,12 +29,12 @@ $(build-dirs-y):
 
 musl/:
 	${GMAKE} -C $@ install
-$(subdirs):
+$(subdirs-y):
 	${MAKE} -C $@ install
 
 musl/-clean:
 	${GMAKE} -C musl/ clean
-subdirs-clean := ${subdirs:%=%-clean}
+subdirs-clean := ${subdirs-y:%=%-clean}
 $(subdirs-clean):
 	${MAKE} -C ${@:%-clean=%} clean
 
@@ -44,4 +44,4 @@ clean: ${subdirs-clean}
 tar: all
 	tar zcf metal.tar.gz ${metal-build}
 
-.PHONY: ${subdirs} ${subdirs-clean}
+.PHONY: ${subdirs-y} ${subdirs-clean}

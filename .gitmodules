@@ -6,4 +6,4 @@
 	url = git@github.com:quirinpa/musl.git
 [submodule "binaryen"]
 	path = binaryen
-	url = https://github.com/WebAssembly/binaryen
+	url = git@github.com:quirinpa/binaryen.git
