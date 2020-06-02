@@ -1,6 +1,3 @@
-[submodule "metal-linux"]
-	path = metal-linux
-	url = git@github.com:quirinpa/metal-linux.git
 [submodule "musl"]
 	path = musl
 	url = git@github.com:quirinpa/musl.git
