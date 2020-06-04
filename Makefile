@@ -7,7 +7,10 @@ INSTALL_LIBDIR ?= ${METAL_PREFIX}/lib
 INSTALL_INCDIR ?= ${METAL_PREFIX}/include
 EXTRACT_SUFX ?= .tar.gz
 METAL_V ?= 0.0.3-alpha
-RELEASE := metal-${METAL_V}.src${EXTRACT_SUFX}
+METAL_SUFX := $(METAL_V).src$(EXTRACT_SUFX)
+metal-release-main := metal-$(METAL_SUFX)
+metal-release-linux := metal-linux-$(METAL_SUFX)
+metal-release := ${metal-release-main} ${metal-release-linux}
 
 all:
 	# OK
@@ -24,9 +27,12 @@ install:
 	mkdir -p ${INSTALL_LIBDIR}
 	${INSTALL} ./lib/wasm.syms ${INSTALL_LIBDIR}
 
-${RELEASE}:
+$(metal-release-main):
 	tar czf $@ mk lib include Makefile
 
-release: ${RELEASE}
+$(metal-release-linux):
+	tar czf $@ linux/*
+
+release: ${metal-release}
 
 .PHONY: install release
