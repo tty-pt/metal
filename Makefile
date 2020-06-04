@@ -1,9 +1,8 @@
 DESTDIR ?= /
 PREFIX ?= ${DESTDIR}/usr/local
-METAL_PREFIX ?= ${DESTDIR}/var/www/metal
+METAL_PREFIX ?= ${PREFIX}/metal
 INSTALL ?= install
 INSTALL_MKDIR ?= ${PREFIX}/mk
-# INSTALL_BINDIR ?= ${METAL_PREFIX}/bin
 INSTALL_INCDIR ?= ${METAL_PREFIX}/include
 
 all:
