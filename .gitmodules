@@ -1,9 +1,0 @@
-[submodule "musl"]
-	path = musl
-	url = git@github.com:quirinpa/musl.git
-[submodule "binaryen"]
-	path = binaryen
-	url = git@github.com:quirinpa/binaryen.git
-[submodule "linux"]
-	path = linux
-	url = git@github.com:qnixsoft/linux.git

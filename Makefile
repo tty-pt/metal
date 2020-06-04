@@ -1,16 +1,21 @@
-.include "GNUmakefile"
+DESTDIR ?= /
+PREFIX ?= ${DESTDIR}/usr/local
+METAL_PREFIX ?= ${DESTDIR}/var/www/metal
+INSTALL ?= install
+INSTALL_MKDIR ?= ${PREFIX}/mk
+# INSTALL_BINDIR ?= ${METAL_PREFIX}/bin
+INSTALL_INCDIR ?= ${METAL_PREFIX}/include
 
-MKDIRS=src
+all:
+	# OK
 
-init: ${MKDIRS}
-.if defined(name)
-	mkdir src/${name}
-	cd src/${name}
-	npm init
-	npm install --save metal
-.else
-	# Please define name parameter (i.e make init name=...)
-.endif
+install:
+	mkdir -p ${INSTALL_MKDIR}
+	${INSTALL} ./mk/metal.mk ${INSTALL_MKDIR}
+	${INSTALL} ./mk/hjs.mk ${INSTALL_MKDIR}
+	mkdir -p ${INSTALL_INCDIR}/metal
+	${INSTALL} ./include/metal.h ${INSTALL_INCDIR}
+	${INSTALL} ./include/metal/full.hjs ${INSTALL_INCDIR}/metal
+	${INSTALL} ./include/metal/env.js ${INSTALL_INCDIR}/metal
 
-${MKDIRS}:
-	${MKDIR} -p ${MKDIRS}
+.PHONY: install
