@@ -6,8 +6,8 @@ INSTALL_MKDIR ?= ${PREFIX}/mk
 INSTALL_LIBDIR ?= ${METAL_PREFIX}/lib
 INSTALL_INCDIR ?= ${METAL_PREFIX}/include
 EXTRACT_SUFX ?= .tar.gz
-METAL_V ?= 0.0.3
-RELEASE := metal-${METAL_V}${EXTRACT_SUFX}
+METAL_V ?= 0.0.3-alpha
+RELEASE := metal-${METAL_V}.src${EXTRACT_SUFX}
 
 all:
 	# OK
