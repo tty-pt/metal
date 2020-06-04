@@ -1,7 +1,7 @@
 ARCH=wasm32
 TARGET=${ARCH}-unknown-unknown
-DESTDIR-git != git rev-parse --show-superproject-working-tree
-DESTDIR != [[ -z "${DESTDIR-git}" ]] && echo ".." || echo "${DESTDIR-git}"
+METAL_DESTDIR := ${DESTDIR}/metal
+DESTDIR := ${METAL_DESTDIR}
 srcdir?=.
 
 LLVM_ROOT:=/usr/local
