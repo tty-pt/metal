@@ -9,8 +9,9 @@ EXTRACT_SUFX ?= .tar.gz
 METAL_V ?= 0.0.3-alpha
 METAL_SUFX := $(METAL_V).src$(EXTRACT_SUFX)
 metal-release-main := metal-$(METAL_SUFX)
-metal-release-linux := metal-linux-$(METAL_SUFX)
-metal-release := ${metal-release-main} ${metal-release-linux}
+metal-modules := metal-linux metal-musl
+metal-release-modules := ${metal-modules:%=%-${METAL_SUFX}}
+metal-release := ${metal-release-main} ${metal-release-modules}
 
 all:
 	# OK
@@ -30,8 +31,8 @@ install:
 $(metal-release-main):
 	tar czf $@ mk lib include Makefile
 
-$(metal-release-linux):
-	tar czf $@ linux/*
+$(metal-release-modules):
+	tar czf $@ ${@:metal-%-${METAL_SUFX}=%}/*
 
 release: ${metal-release}
 

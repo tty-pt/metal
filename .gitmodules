@@ -2,3 +2,7 @@
 	path = linux
 	url = git@github.com:qnixsoft/linux.git
 	branch = metal
+[submodule "musl"]
+	path = musl
+	url = git@github.com:qnixsoft/musl.git
+	branch = metal
