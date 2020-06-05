@@ -1,19 +1,24 @@
 ARCH=wasm32
 TARGET=${ARCH}-unknown-unknown
-METAL_DESTDIR := ${DESTDIR}/metal
-DESTDIR := ${METAL_DESTDIR}
+
+INSTALL ?= install
+METAL_PREFIX ?= ${PREFIX}/metal
+INSTALL_BINDIR ?= ${METAL_PREFIX}/bin
+INSTALL_LIBDIR ?= ${METAL_PREFIX}/lib
+INSTALL_INCDIR ?= ${METAL_PREFIX}/include
+
 srcdir?=.
 
 LLVM_ROOT:=/usr/local
 CC:=${LLVM_ROOT}/bin/clang
-CFLAGS += --sysroot ${DESTDIR} --target=${TARGET}
-LDFLAGS += --allow-undefined-file=${DESTDIR}/lib/wasm.syms --export-dynamic
+CFLAGS += --sysroot ${METAL_PREFIX} --target=${TARGET}
+LDFLAGS += --allow-undefined-file=${METAL_PREFIX}/lib/wasm.syms --export-dynamic
 LD_CFLAGS += -fuse-ld=${LD} ${LDFLAGS:%=--Wl,%}
 
 LD:=${LLVM_ROOT}/bin/wasm-ld
 RTLIB=clang_rt.builtins-wasm32
-LDLIBS+=-l${RTLIB}
-LINK.c += -resource-dir=${DESTDIR}
+# LDLIBS+=-l${RTLIB}
+LINK.c += -resource-dir=${METAL_PREFIX}
 PROG_LDLIBS+=-lc
 
 AR=llvm-ar
