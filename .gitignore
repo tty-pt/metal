@@ -1,7 +1,6 @@
 /bin/*
 /include/*
 !/include/metal.h
-!/include/features.h
 /lib/*
 !/lib/wasm/syms
 /tmp/*

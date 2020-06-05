@@ -2,12 +2,14 @@ ARCH=wasm32
 TARGET=${ARCH}-unknown-unknown
 
 INSTALL ?= install
+srcdir?=.
+DESTDIR ?= /
+PREFIX ?= ${DESTDIR}usr/local
 METAL_PREFIX ?= ${PREFIX}/metal
 INSTALL_BINDIR ?= ${METAL_PREFIX}/bin
 INSTALL_LIBDIR ?= ${METAL_PREFIX}/lib
 INSTALL_INCDIR ?= ${METAL_PREFIX}/include
 
-srcdir?=.
 
 LLVM_ROOT:=/usr/local
 CC:=${LLVM_ROOT}/bin/clang
