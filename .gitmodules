@@ -6,3 +6,6 @@
 	path = musl
 	url = git@github.com:qnixsoft/musl.git
 	branch = metal
+[submodule "rt"]
+	path = rt
+	url = git@github.com:qnixsoft/compiler-rt.git

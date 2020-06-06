@@ -14,7 +14,7 @@ INSTALL_INCDIR ?= ${METAL_PREFIX}/include
 LLVM_ROOT:=/usr/local
 CC:=${LLVM_ROOT}/bin/clang
 CFLAGS += --sysroot ${METAL_PREFIX} --target=${TARGET}
-LDFLAGS += --allow-undefined-file=${METAL_PREFIX}/lib/wasm.syms --export-dynamic
+LDFLAGS := --allow-undefined-file=${METAL_PREFIX}/lib/wasm.syms --export-dynamic ${LDFLAGS}
 LD_CFLAGS += -fuse-ld=${LD} ${LDFLAGS:%=--Wl,%}
 
 LD:=${LLVM_ROOT}/bin/wasm-ld
