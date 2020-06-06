@@ -23,14 +23,14 @@ all: ${submodules-y}
 
 install: ${submodules-install}
 	mkdir -p ${INSTALL_MKDIR}
-	${INSTALL} ./mk/hjs.mk ${INSTALL_MKDIR}
-	${INSTALL} ./mk/wasm.mk ${INSTALL_MKDIR}
+	${INSTALL} -m 622 ./mk/hjs.mk ${INSTALL_MKDIR}
+	${INSTALL} -m 622 ./mk/wasm.mk ${INSTALL_MKDIR}
 	mkdir -p ${INSTALL_INCDIR}/metal
-	${INSTALL} ./include/metal.h ${INSTALL_INCDIR}
-	${INSTALL} ./include/metal/full.hjs ${INSTALL_INCDIR}/metal
-	${INSTALL} ./include/metal/env.js ${INSTALL_INCDIR}/metal
+	${INSTALL} -m 622 ./include/metal.h ${INSTALL_INCDIR}
+	${INSTALL} -m 622 ./include/metal/full.hjs ${INSTALL_INCDIR}/metal
+	${INSTALL} -m 622 ./include/metal/env.js ${INSTALL_INCDIR}/metal
 	mkdir -p ${INSTALL_LIBDIR}
-	${INSTALL} ./lib/wasm.syms ${INSTALL_LIBDIR}
+	${INSTALL} -m 622 ./lib/wasm.syms ${INSTALL_LIBDIR}
 
 $(gmake-y):
 	${GMAKE} ${MKFLAGS} -C $@
