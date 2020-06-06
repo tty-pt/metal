@@ -21,7 +21,8 @@ LD:=${LLVM_ROOT}/bin/wasm-ld
 RTLIB=clang_rt.builtins-wasm32
 # LDLIBS+=-l${RTLIB}
 LINK.c += -resource-dir=${METAL_PREFIX}
-PROG_LDLIBS+=-lc
+RTLIB := clang_rt.builtins-wasm32
+PROG_LDLIBS+=-lc -l${RTLIB}
 
 AR=llvm-ar
 RANLIB=llvm-ranlib
