@@ -21,7 +21,7 @@ metal-release := ${metal-release-main} ${submodules-release}
 CMAKE ?= cmake
 GMAKE := gmake
 MKFLAGS += MKDIR=${PWD}/mk
-CC := ${DESTDIR}/usr/bin/clang
+CC := /usr/bin/clang
 
 all: ${submodules-y}
 
@@ -39,9 +39,9 @@ install: ${submodules-install}
 rt/Makefile:
 	cd rt ; ${CMAKE} -DCMAKE_CXX_COMPILER=${CC} -DCMAKE_C_COMPILER=${CC} -DCAN_TARGET_wasm32=ON \
 		-DCMAKE_INSTALL_PREFIX=${PREFIX}/metal \
-		-DCMAKE_AR=${DESTDIR}usr/bin/llvm-ar \
-		-DCMAKE_RANLIB=${DESTDIR}usr/bin/llvm-ranlib \
-		-DLLVM_CONFIG_PATH=${DESTDIR}usr/bin/llvm-config \
+		-DCMAKE_AR=/usr/bin/llvm-ar \
+		-DCMAKE_RANLIB=/usr/bin/llvm-ranlib \
+		-DLLVM_CONFIG_PATH=/usr/bin/llvm-config \
 		-DCMAKE_VERBOSE_MAKEFILE=ON \
 		-DCOMPILER_RT_DEFAULT_TARGET_TRIPLE=wasm32-unknown-unknown-wasm \
 		-DCOMPILER_RT_EXCLUDE_ATOMIC_BUILTIN=ON \
