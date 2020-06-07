@@ -21,7 +21,7 @@ metal-release := ${metal-release-main} ${submodules-release}
 CMAKE ?= cmake
 GMAKE := gmake
 MKFLAGS += MKDIR=${PWD}/mk
-CC := ${PREFIX}/bin/clang
+CC := ${DESTDIR}/usr/bin/clang
 
 all: ${submodules-y}
 
