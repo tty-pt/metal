@@ -39,9 +39,9 @@ install: ${submodules-install}
 rt/Makefile:
 	cd rt ; ${CMAKE} -DCMAKE_CXX_COMPILER=${CC} -DCMAKE_C_COMPILER=${CC} -DCAN_TARGET_wasm32=ON \
 		-DCMAKE_INSTALL_PREFIX=${PREFIX}/metal \
-		-DCMAKE_AR=${PREFIX}/bin/llvm-ar \
-		-DCMAKE_RANLIB=${PREFIX}/bin/llvm-ranlib \
-		-DLLVM_CONFIG_PATH=${PREFIX}/bin/llvm-config \
+		-DCMAKE_AR=${DESTDIR}usr/bin/llvm-ar \
+		-DCMAKE_RANLIB=${DESTDIR}usr/bin/llvm-ranlib \
+		-DLLVM_CONFIG_PATH=${DESTDIR}usr/bin/llvm-config \
 		-DCMAKE_VERBOSE_MAKEFILE=ON \
 		-DCOMPILER_RT_DEFAULT_TARGET_TRIPLE=wasm32-unknown-unknown-wasm \
 		-DCOMPILER_RT_EXCLUDE_ATOMIC_BUILTIN=ON \
