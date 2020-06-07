@@ -38,7 +38,7 @@ install: ${submodules-install}
 
 rt/Makefile:
 	cd rt ; ${CMAKE} -DCMAKE_CXX_COMPILER=${CC} -DCMAKE_C_COMPILER=${CC} -DCAN_TARGET_wasm32=ON \
-		-DCMAKE_INSTALL_PREFIX=${PREFIX}/metal \
+		-DCMAKE_INSTALL_PREFIX=${METAL_PREFIX} \
 		-DCMAKE_AR=/usr/bin/llvm-ar \
 		-DCMAKE_RANLIB=/usr/bin/llvm-ranlib \
 		-DLLVM_CONFIG_PATH=/usr/bin/llvm-config \
