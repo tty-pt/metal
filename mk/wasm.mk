@@ -30,3 +30,12 @@ WASM2JS = ${PREFIX}/bin/wasm2js ${wasm2js-flags-y}
 .SUFFIXES: .wasm .js
 .wasm.js:
 	${WASM2JS} $< > $@
+
+# deprecated:
+# .SUFFIXES: .wasm .wat .wasm2 .js
+# .wasm.wat:
+# 	${WASM2WAT} $< > $@
+# .wat.wasm2:
+# 	${WAT2WASM} $< > $@
+# .wasm2.js:
+# 	${WASM2JS} $< > $@
