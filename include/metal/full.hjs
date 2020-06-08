@@ -1,7 +1,0 @@
-#include "metal-env.js"
-#define METAL_IMPORT "env"
-#define METAL_NAME "metal"
-#include "metal.js"
-#undef METAL_NAME
-#undef METAL_IMPORT
-#define METAL_IMPORT "metal"
