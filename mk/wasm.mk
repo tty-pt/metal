@@ -23,7 +23,9 @@ RANLIB=llvm-ranlib
 prefix=
 exec_prefix=${prefix}
 CROSS-COMPILE=llvm-
-WASM2JS := ${PREFIX}/bin/wasm2js ${wasm2js-flags-y} 
+metal-flags-y := --enable-reference-types
+wasm2js-flags-y := -Oz ${metal-flags-y} --enable-mutable-globals
+WASM2JS = ${PREFIX}/bin/wasm2js ${wasm2js-flags-y}
 
 .SUFFIXES: .wasm .js
 .wasm.js:
