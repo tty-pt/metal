@@ -22,6 +22,7 @@ CMAKE ?= cmake
 GMAKE := gmake
 MKFLAGS += MKDIR=${PWD}/mk
 CC := /usr/local/bin/clang
+rt-clean-y := CMakeCache.txt CMakeFiles/ Makefile cmake_install.cmake
 
 all: ${submodules-y}
 
@@ -60,6 +61,9 @@ $(submodules-install):
 
 clean: ${submodules-clean}
 
+rt-clean:
+	rm -rf ${rt-clean-y:%=rt/%} 2>&1 >/dev/null
+
 musl-clean:
 	${GMAKE} ${MKFLAGS} -C musl clean
 
@@ -72,7 +76,7 @@ $(metal-release-main):
 $(submodules-release):
 	tar czf $@ ${@:metal-%-${METAL_SUFX}=%}/*
 
-release: ${metal-release}
+release: clean ${metal-release}
 
 .PHONY: install ${submodules-install} \
 	clean ${submodules-clean} \
