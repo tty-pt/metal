@@ -1,22 +1,26 @@
 ARCH=wasm32
 TARGET=${ARCH}-unknown-unknown
 
+METAL_V ?= 0.0.3-alpha
+
 INSTALL ?= install
 srcdir?=.
+
 DESTDIR ?= /
 PREFIX ?= ${DESTDIR}usr/local
-METAL_PREFIX ?= ${PREFIX}/metal
-INSTALL_BINDIR ?= ${METAL_PREFIX}/bin
-INSTALL_LIBDIR ?= ${METAL_PREFIX}/lib
-INSTALL_INCDIR ?= ${METAL_PREFIX}/include
+
+INSTALL_MKDIR ?= ${METAL_PATH}/mk
+INSTALL_BINDIR ?= ${METAL_PATH}/bin
+INSTALL_LIBDIR ?= ${METAL_PATH}/lib
+INSTALL_INCDIR ?= ${METAL_PATH}/include
 
 LLVM_ROOT:=/usr/local
 CC:=${LLVM_ROOT}/bin/clang
-CFLAGS += --sysroot ${METAL_PREFIX} --target=${TARGET}
-LD_CFLAGS += -fuse-ld=${LD} -Wl,--allow-undefined-file=${METAL_PREFIX}/lib/wasm.syms,--export-dynamic
+CFLAGS += --sysroot ${METAL_PATH} --target=${TARGET}
+LD_CFLAGS += -fuse-ld=${LD} -Wl,--allow-undefined-file=${METAL_PATH}/lib/wasm.syms,--export-dynamic
 
 LD:=${LLVM_ROOT}/bin/wasm-ld
-LINK.c := ${CC} ${CFLAGS} ${LD_CFLAGS} -resource-dir=${METAL_PREFIX}
+LINK.c := ${CC} ${CFLAGS} ${LD_CFLAGS} -resource-dir=${METAL_PATH}
 
 AR=llvm-ar
 RANLIB=llvm-ranlib
@@ -25,7 +29,7 @@ exec_prefix=${prefix}
 CROSS-COMPILE=llvm-
 metal-flags-y := --enable-reference-types
 wasm2js-flags-y := -Oz ${metal-flags-y} --enable-mutable-globals
-WASM2JS = ${PREFIX}/bin/wasm2js ${wasm2js-flags-y}
+WASM2JS = wasm2js ${wasm2js-flags-y}
 
 .SUFFIXES: .wasm .js
 .wasm.js:

@@ -1,12 +1,11 @@
+mode ?= prod
 DESTDIR ?= /
-PREFIX ?= ${DESTDIR}usr/local
-METAL_PREFIX ?= ${PREFIX}/metal
-INSTALL ?= install
-INSTALL_MKDIR ?= ${PREFIX}/mk
-INSTALL_LIBDIR ?= ${METAL_PREFIX}/lib
-INSTALL_INCDIR ?= ${METAL_PREFIX}/include
+
+METAL_PATH := ${PWD}
+
+include mk/wasm.mk
+
 EXTRACT_SUFX ?= .tar.gz
-METAL_V ?= 0.0.3-alpha
 METAL_SUFX := $(METAL_V).src$(EXTRACT_SUFX)
 metal-release-main := metal-$(METAL_SUFX)
 submodules-y := linux musl rt
@@ -20,24 +19,27 @@ submodules-release := ${submodules-y:%=metal-%-${METAL_SUFX}} metal-rt-${METAL_S
 metal-release := ${metal-release-main} ${submodules-release}
 CMAKE ?= cmake
 GMAKE := gmake
-MKFLAGS += MKDIR=${PWD}/mk
+MKFLAGS += METAL_PATH=${METAL_PATH}
 CC := /usr/local/bin/clang
+METAL_HTDOCS ?= /var/www/htdocs/
 rt-clean-y := CMakeCache.txt CMakeFiles/ Makefile cmake_install.cmake
-
 all: ${submodules-y}
 
-install: ${submodules-install}
+install: ${submodules-install} htdocs-install
 	mkdir -p ${INSTALL_MKDIR}
-	${INSTALL} -m 622 ./mk/hjs.mk ${INSTALL_MKDIR}
-	${INSTALL} -m 622 ./mk/wasm.mk ${INSTALL_MKDIR}
+	${INSTALL} -m 644 ./mk/hjs.mk ${INSTALL_MKDIR}
+	${INSTALL} -m 644 ./mk/wasm.mk ${INSTALL_MKDIR}
 	mkdir -p ${INSTALL_INCDIR}/metal
-	${INSTALL} -m 622 ./include/metal.h ${INSTALL_INCDIR}
+	${INSTALL} -m 644 ./include/metal.h ${INSTALL_INCDIR}
 	mkdir -p ${INSTALL_LIBDIR}
-	${INSTALL} -m 622 ./lib/wasm.syms ${INSTALL_LIBDIR}
+	${INSTALL} -m 644 ./lib/wasm.syms ${INSTALL_LIBDIR}
+
+htdocs-install:
+	${INSTALL} -m 644 ./linux/metal.js ${METAL_HTDOCS}
 
 rt/Makefile:
 	cd rt ; ${CMAKE} -DCMAKE_CXX_COMPILER=${CC} -DCMAKE_C_COMPILER=${CC} -DCAN_TARGET_wasm32=ON \
-		-DCMAKE_INSTALL_PREFIX=${METAL_PREFIX} \
+		-DCMAKE_INSTALL_PREFIX=${METAL_PATH} \
 		-DCMAKE_AR=/usr/local/bin/llvm-ar \
 		-DCMAKE_RANLIB=/usr/local/bin/llvm-ranlib \
 		-DLLVM_CONFIG_PATH=/usr/local/bin/llvm-config \
