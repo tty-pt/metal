@@ -1,7 +1,7 @@
 ARCH=wasm32
 TARGET=${ARCH}-unknown-unknown
 
-METAL_V ?= 0.0.3-alpha
+METAL_V ?= 0.0.4-alpha
 
 INSTALL ?= install
 srcdir?=.
