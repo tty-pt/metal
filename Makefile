@@ -6,7 +6,7 @@ METAL_PATH := ${PWD}
 include mk/wasm.mk
 
 EXTRACT_SUFX ?= .tar.gz
-METAL_SUFX := $(METAL_V).src$(EXTRACT_SUFX)
+METAL_SUFX := v$(METAL_V).src$(EXTRACT_SUFX)
 metal-release-main := metal-$(METAL_SUFX)
 submodules-y := linux musl rt
 gmake-y := musl
