@@ -1,4 +1,4 @@
-mode ?= prod
+METAL_MODE ?= prod
 DESTDIR ?= /
 
 METAL_PATH := ${PWD}
@@ -19,7 +19,8 @@ submodules-release := ${submodules-y:%=metal-%-${METAL_SUFX}} metal-rt-${METAL_S
 metal-release := ${metal-release-main} ${submodules-release}
 CMAKE ?= cmake
 GMAKE := gmake
-MKFLAGS += METAL_PATH=${METAL_PATH}
+mkflags-dev := METAL_PATH=${METAL_PATH}
+MKFLAGS := ${mkflags-${METAL_MODE}}
 CC := /usr/local/bin/clang
 METAL_HTDOCS ?= /var/www/htdocs/
 rt-clean-y := CMakeCache.txt CMakeFiles/ Makefile cmake_install.cmake
@@ -56,6 +57,7 @@ $(gmake-y):
 $(submodules-y):
 	${MAKE} ${MKFLAGS} -C $@
 
+rt-install: rt
 $(gmake-install):
 	${GMAKE} ${MKFLAGS} -C ${@:%-install=%} install
 $(submodules-install):

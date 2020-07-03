@@ -7,15 +7,16 @@ INSTALL ?= install
 srcdir?=.
 
 DESTDIR ?= /
-PREFIX ?= ${DESTDIR}usr/local
+PREFIX ?= ${DESTDIR}usr/local/metal
 
-INSTALL_MKDIR ?= ${METAL_PATH}/mk
-INSTALL_BINDIR ?= ${METAL_PATH}/bin
-INSTALL_LIBDIR ?= ${METAL_PATH}/lib
-INSTALL_INCDIR ?= ${METAL_PATH}/include
+INSTALL_MKDIR ?= ${PREFIX}/mk
+INSTALL_BINDIR ?= ${PREFIX}/bin
+INSTALL_LIBDIR ?= ${PREFIX}/lib
+INSTALL_INCDIR ?= ${PREFIX}/include
 
 LLVM_ROOT:=/usr/local
 CC:=${LLVM_ROOT}/bin/clang
+METAL_PATH ?= ${PREFIX}
 CFLAGS += --sysroot ${METAL_PATH} --target=${TARGET}
 LD_CFLAGS += -fuse-ld=${LD} -Wl,--allow-undefined-file=${METAL_PATH}/lib/wasm.syms,--export-dynamic
 
