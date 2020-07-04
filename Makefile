@@ -54,13 +54,21 @@ $(gmake-y):
 $(submodules-y):
 	${MAKE} ${MKFLAGS} -C $@
 
-rt-install: rt
+os != uname -s | tr '[:upper:]' '[:lower:]'
+rt-name := libclang_rt.builtins-wasm32.a
+rt-install-dev:
+	cp ${INSTALL_LIBDIR}/${os}/${rt-name} ${INSTALL_LIBDIR}/
+rt-install: rt rt-install-${m}
+
 $(gmake-install):
 	${GMAKE} ${MKFLAGS} -C ${@:%-install=%} install
 $(submodules-install):
 	${MAKE} ${MKFLAGS} -C ${@:%-install=%} install
 
+clean-y := include/* lib/*
 clean: ${submodules-clean}
+	rm -rf ${clean-y} 2>&1 >/dev/null
+	git checkout include/metal.h lib/wasm.syms
 
 rt-clean:
 	rm -rf ${rt-clean-y:%=rt/%} 2>&1 >/dev/null
