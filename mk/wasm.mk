@@ -2,21 +2,32 @@ ARCH=wasm32
 TARGET=${ARCH}-unknown-unknown
 
 METAL_V ?= 0.0.4-alpha
+m := ${METAL_MODE}
 
 INSTALL ?= install
 srcdir?=.
 
 DESTDIR ?= /
-PREFIX ?= ${DESTDIR}usr/local/metal
+PREFIX ?= ${DESTDIR}usr/local
 
-INSTALL_MKDIR ?= ${PREFIX}/mk
-INSTALL_BINDIR ?= ${PREFIX}/bin
-INSTALL_LIBDIR ?= ${PREFIX}/lib
-INSTALL_INCDIR ?= ${PREFIX}/include
+# install dirs and metal-prefix
+METAL_PATH ?= /usr/local/metal
+
+metal-path- := ${PREFIX}/metal
+metal-path-dev := ${METAL_PATH}
+metal-path := ${metal-path-${m}}
+
+INSTALL_MKDIR ?= ${metal-path}/mk
+INSTALL_LIBDIR ?= ${metal-path}/lib
+INSTALL_INCDIR ?= ${metal-path}/include
+
+METAL_HTDOCS ?= /var/www/htdocs/neverdark-dev
+install-bindir-dev := ${METAL_HTDOCS}
+install-bindir- := ${metal-path}/bin
+INSTALL_BINDIR ?= ${install-bindir-${m}}
 
 LLVM_ROOT:=/usr/local
 CC:=${LLVM_ROOT}/bin/clang
-METAL_PATH ?= ${PREFIX}
 CFLAGS += --sysroot ${METAL_PATH} --target=${TARGET}
 LD_CFLAGS += -fuse-ld=${LD} -Wl,--allow-undefined-file=${METAL_PATH}/lib/wasm.syms,--export-dynamic
 
@@ -28,19 +39,7 @@ RANLIB=llvm-ranlib
 prefix=
 exec_prefix=${prefix}
 CROSS-COMPILE=llvm-
-metal-flags-y := --enable-reference-types
-wasm2js-flags-y := -Oz ${metal-flags-y} --enable-mutable-globals
-WASM2JS = wasm2js ${wasm2js-flags-y}
 
 .SUFFIXES: .wasm .js
 .wasm.js:
-	${WASM2JS} $< > $@
-
-# deprecated:
-# .SUFFIXES: .wasm .wat .wasm2 .js
-# .wasm.wat:
-# 	${WASM2WAT} $< > $@
-# .wat.wasm2:
-# 	${WAT2WASM} $< > $@
-# .wasm2.js:
-# 	${WASM2JS} $< > $@
+	wasm2js -Oz --enable-reference-types --enable-mutable-globals $< > $@

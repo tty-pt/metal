@@ -1,4 +1,3 @@
-METAL_MODE ?= prod
 DESTDIR ?= /
 
 METAL_PATH := ${PWD}
@@ -19,10 +18,8 @@ submodules-release := ${submodules-y:%=metal-%-${METAL_SUFX}} metal-rt-${METAL_S
 metal-release := ${metal-release-main} ${submodules-release}
 CMAKE ?= cmake
 GMAKE := gmake
-mkflags-dev := METAL_PATH=${METAL_PATH}
-MKFLAGS := ${mkflags-${METAL_MODE}}
+MKFLAGS := METAL_PATH=${METAL_PATH} METAL_MODE=${m}
 CC := /usr/local/bin/clang
-METAL_HTDOCS ?= /var/www/htdocs/
 rt-clean-y := CMakeCache.txt CMakeFiles/ Makefile cmake_install.cmake
 all: ${submodules-y}
 
@@ -36,11 +33,11 @@ install: ${submodules-install} htdocs-install
 	${INSTALL} -m 644 ./lib/wasm.syms ${INSTALL_LIBDIR}
 
 htdocs-install:
-	${INSTALL} -m 644 ./linux/metal.js ${METAL_HTDOCS}
+	${INSTALL} -m 644 ./linux/metal.js ${INSTALL_BINDIR}
 
 rt/Makefile:
 	cd rt ; ${CMAKE} -DCMAKE_CXX_COMPILER=${CC} -DCMAKE_C_COMPILER=${CC} -DCAN_TARGET_wasm32=ON \
-		-DCMAKE_INSTALL_PREFIX=${METAL_PATH} \
+		-DCMAKE_INSTALL_PREFIX=${metal-path} \
 		-DCMAKE_AR=/usr/local/bin/llvm-ar \
 		-DCMAKE_RANLIB=/usr/local/bin/llvm-ranlib \
 		-DLLVM_CONFIG_PATH=/usr/local/bin/llvm-config \
@@ -80,7 +77,7 @@ $(metal-release-main):
 $(submodules-release):
 	tar czf $@ ${@:metal-%-${METAL_SUFX}=%}/*
 
-release: clean ${metal-release}
+release: ${metal-release}
 
 .PHONY: install ${submodules-install} \
 	clean ${submodules-clean} \
