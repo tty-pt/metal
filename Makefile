@@ -23,7 +23,7 @@ CC := /usr/local/bin/clang
 rt-clean-y := CMakeCache.txt CMakeFiles/ Makefile cmake_install.cmake
 all: ${submodules-y}
 
-install: ${submodules-install} htdocs-install
+install: ${submodules-install} rt-install-${m} htdocs-install
 	mkdir -p ${INSTALL_MKDIR}
 	${INSTALL} -m 644 ./mk/hjs.mk ${INSTALL_MKDIR}
 	${INSTALL} -m 644 ./mk/wasm.mk ${INSTALL_MKDIR}
@@ -58,7 +58,8 @@ os != uname -s | tr '[:upper:]' '[:lower:]'
 rt-name := libclang_rt.builtins-wasm32.a
 rt-install-dev:
 	cp ${INSTALL_LIBDIR}/${os}/${rt-name} ${INSTALL_LIBDIR}/
-rt-install: rt rt-install-${m}
+
+rt-install: rt
 
 $(gmake-install):
 	${GMAKE} ${MKFLAGS} -C ${@:%-install=%} install

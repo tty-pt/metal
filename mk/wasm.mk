@@ -1,5 +1,5 @@
-ARCH=wasm32
-TARGET=${ARCH}-unknown-unknown
+ARCH ?= wasm
+TARGET=${ARCH}32-unknown-unknown
 
 METAL_V ?= 0.0.4-alpha
 m := ${METAL_MODE}
